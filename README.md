@@ -12,4 +12,4 @@ Fall2021_GeoPandas.ipynb
  
 ## Example 3 - Colorscale Cartogram 
 
-<img src="carto.png" width='90vw'/>
+<img src="carto.png" width='400px'/>
