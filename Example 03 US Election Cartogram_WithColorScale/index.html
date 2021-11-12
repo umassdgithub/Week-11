@@ -83,6 +83,9 @@
     </svg>
 </div>
 <script>
+
+   let allData
+
     let gop_color = "#FF0000"
     let dem_color = "#0015BC"
     // load the data sources:
@@ -100,6 +103,7 @@
             ,d3.autoType()).then(main)
 
     function main(data){
+
 
         let width = 1000
         let height= 1000
@@ -141,12 +145,8 @@
             .attr("d",geo_generator)
             .style("fill",function (d){
                 try{
-                    if(election_data[d.properties.GEOID]["dems"][3]<election_data[d.properties.GEOID]["gop"][3]){
-                        return dem_color
-                    }
-                    else{
-                        return gop_color
-                    }
+                        return colorGen(d.properties.GEOID)
+
                 }
                 catch (error)
                 {
@@ -173,6 +173,16 @@
             mapCanvas.attr("transform",transform)
         }
 
+        function colorGen(fips){
+            const votes_parties = data[2].filter(d=>d['county_fips']===fips).map(d=>{return {total: +d.total_votes, gop: +d.votes_gop,dem: +d.votes_dem}})[0]
+            if(votes_parties['dem']>votes_parties['gop']){
+                return d3.interpolateRgb("white", dem_color)(votes_parties['dem']/votes_parties['total'])
+            }
+            else{
+                return d3.interpolateRgb("white", gop_color)(votes_parties['gop']/votes_parties['total'])
+            }
+        }
+
 
    function tooltip_html(fips){
     let margin={x:30,y:0}
@@ -180,8 +190,6 @@
        console.log(fips)
         let history_dems = election_data[fips]['dems']
         let history_gop = election_data[fips]['gop']
-
-
 
     let extent = d3.extent([history_dems,history_gop].flat(),function (d){return d})
     let xScale=d3.scaleLinear().domain([2006,2020]).range([0,150])
