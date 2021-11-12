@@ -10,3 +10,4 @@ Fall2021_GeoPandas.ipynb
 
 ## Example 2 - Multiview Cartogram with D3js
  
+## Example 3 - Colorscale Cartogram 
