@@ -148,10 +148,10 @@
                 .attr("fill",function (d){
                     try{
                         if(election_data[d.properties.GEOID]["dems"][3]<election_data[d.properties.GEOID]["gop"][3]){
-                            return dem_color
+                            return gop_color;
                         }
                         else{
-                            return gop_color
+                            return dem_color;
                         }
                     }
                     catch (error)
