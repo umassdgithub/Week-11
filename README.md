@@ -1,4 +1,4 @@
-# Fall 2021 Week 11 Friday
+# Week 11 Friday
 ## Cartogram Map 
 ### Using geopandas to generate to merge data to geojson 
 Fall2021_GeoPandas.ipynb
